@@ -14,7 +14,7 @@ export class EstoqueService {
     return this.produtoRepository.find();
   }
 
-  async findOne(id: number): Promise<Produto> {
+  async findOne(id: string): Promise<Produto> {
     return this.produtoRepository.findOne({ where: { id } });
   }
 
@@ -23,12 +23,12 @@ export class EstoqueService {
     return this.produtoRepository.save(newProduto);
   }
 
-  async update(id: number, produto: Partial<Produto>): Promise<Produto> {
+  async update(id: string, produto: Partial<Produto>): Promise<Produto> {
     await this.produtoRepository.update(id, produto);
     return this.produtoRepository.findOne({ where: { id } });
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(id: string): Promise<void> {
     await this.produtoRepository.delete(id);
   }
 }

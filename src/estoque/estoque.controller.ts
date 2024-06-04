@@ -1,10 +1,10 @@
 import { Controller, Get, Post, Body, Put, Param, Delete, NotFoundException, HttpCode } from '@nestjs/common';
 import { EstoqueService } from './estoque.service';
-import { User } from './models/produto.entity';
+import { Produto } from './models/produto.entity';
 
 @Controller('api/estoque')
 export class EstoqueController {
-  constructor(private readonly produtoService: ProdutoService) {}
+  constructor(private readonly produtoService: EstoqueService) {}
 
   @Get()
   async findAll(): Promise<Produto[]> {
@@ -19,13 +19,13 @@ export class EstoqueController {
   }
 
   @Put(':id')
-  async update (@Param('id') id: number, @Body() produto: Produto): Promise<any> {
+  async update (@Param('id') id: string, @Body() produto: Produto): Promise<any> {
     await this.produtoService.update(id, produto);
     return { message: 'Produto updated successfully' };
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: number): Promise<any> {
+  async delete(@Param('id') id: string): Promise<any> {
     const produto = await this.produtoService.findOne(id);
 
     if (!produto) {

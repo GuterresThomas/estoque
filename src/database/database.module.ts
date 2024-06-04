@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { Produto } from 'src/estoque/models/produto.entity.ts'
-
+import { Produto } from 'src/estoque/models/produto.entity'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
     imports: [
@@ -17,3 +18,5 @@ import { Produto } from 'src/estoque/models/produto.entity.ts'
       }),
     ],
   })
+
+  export class DatabaseModule {}
