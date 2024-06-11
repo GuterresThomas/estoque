@@ -11,4 +11,10 @@ export class Produto {
 
   @Column()
   quantidade: number;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  criado_em: Date;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  editado_em: Date;
 }

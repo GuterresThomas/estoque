@@ -23,9 +23,9 @@ export class EstoqueService {
     return this.produtoRepository.save(newProduto);
   }
 
-  async update(id: string, produto: Partial<Produto>): Promise<Produto> {
+  async update(id: string, produto: Produto): Promise<Produto> {
     await this.produtoRepository.update(id, produto);
-    return this.produtoRepository.findOne({ where: { id } });
+    return this.findOne(id);
   }
 
   async delete(id: string): Promise<void> {

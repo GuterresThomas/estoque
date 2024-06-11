@@ -19,9 +19,18 @@ export class EstoqueController {
   }
 
   @Put(':id')
-  async update (@Param('id') id: string, @Body() produto: Produto): Promise<any> {
-    await this.produtoService.update(id, produto);
-    return { message: 'Produto updated successfully' };
+  async update (@Param('id') id: string, @Body() produto: Partial<Produto>): Promise<Produto> {
+    const existingProduto = await this.produtoService.findOne(id);
+
+    if (!existingProduto) {
+      throw new NotFoundException('Produto does not exist!');
+    }
+
+    existingProduto.quantidade = produto.quantidade;
+    existingProduto.editado_em = new Date();
+
+    await this.produtoService.update(id, existingProduto);
+    return existingProduto;
   }
 
   @Delete(':id')
